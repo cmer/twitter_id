@@ -1,0 +1,15 @@
+!!! 5
+%head
+  %title Twitter Username to ID converter
+%body
+  %form(method="post")
+    %p Enter a Twitter username (ex: reddit)
+    %input(name="username" value=username)
+    %input(type="submit")
+
+  - if request.post?
+    %p
+      - if userid.nil?
+        = "Invalid username #{username} or impossible to connect to Twitter"
+      - else
+        = "The user id for #{username} is #{userid}."

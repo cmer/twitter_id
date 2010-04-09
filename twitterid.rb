@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'haml'
+require 'open-uri'
 
 get '/' do
   haml :welcome, :locals => {:username => ""}
@@ -13,7 +14,7 @@ end
 
 def user2id(username)
   begin
-    output = `curl http://twitter.com/#{username} 2> /dev/null`
+    output = open("http://twitter.com/#{username}").read
     userid = output.match(/user_timeline\/(([0-9])*)\.rss/)
     return userid[1]
   rescue

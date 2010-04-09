@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'haml'
-require 'ruby-debug'
+
 get '/' do
   haml :welcome, :locals => {:username => ""}
 end

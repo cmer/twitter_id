@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'open-uri'
+require 'json'
 
 get '/' do
   haml :welcome, :locals => {:username => ""}
@@ -14,9 +15,9 @@ end
 
 def user2id(username)
   begin
-    output = open("http://twitter.com/#{username}").read
-    userid = output.match(/user_timeline\/(([0-9])*)\.rss/)
-    return userid[1]
+    output = open("http://api.twitter.com/1/users/show.json?screen_name=#{username}").read
+    h = JSON.load(output)
+    h["id"]
   rescue
     nil
   end
